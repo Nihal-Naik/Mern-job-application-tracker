@@ -4,6 +4,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useDispatch } from 'react-redux'
 import { Changelogin } from '../features/loginSlice';
 import { Changesignup } from '../features/signupSlice';
+import { motion } from 'framer-motion';
 
 const signup = () => {
   const dispatch=useDispatch()
@@ -34,9 +35,9 @@ const signup = () => {
     }
     
   return (
-    <div className='absolute w-sm right-100 border-2 border-green-500 h-100 bg-white'>
+    <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
       
-        <form onSubmit={handleSubmit(onSubmit)} className='grid justify-center mt-15 scale-110'>
+        <motion.form initial={{scale:0,opacity:0}} animate={{scale:1,opacity:1}} onSubmit={handleSubmit(onSubmit)} className='bg-white border-2 border-green-500 p-15 grid justify-center items-center'>
             <input className='placeholder:text-green-500 border-b-2 border-b-green-500 p-2 focus:outline-0 mb-5' type="text" placeholder='Full Name' defaultValue="" {...register("name",{required:true})} />
             {errors.name && <p className='text-red-500'>Enter your full name</p> }
             <input className='placeholder:text-green-500 border-b-2 border-b-green-500 p-2 focus:outline-0 mb-5' type="text" placeholder='Email' defaultValue="" {...register("email",{required:true})} />
@@ -44,7 +45,7 @@ const signup = () => {
             <input className='placeholder:text-green-500 border-b-2 border-b-green-500 p-2 focus:outline-0 mb-5' type="text" placeholder='Password' defaultValue="" {...register("password",{required:true})} />
             {errors.name && <p className='text-red-500'>Enter your password</p> }
             <input disabled={isSubmitting} className='bg-green-500 p-2 rounded-full mt-5 text-white cursor-pointer hover:bg-green-800' type="submit" value="Signup" />
-        </form>
+        </motion.form>
         <Toaster position='top-center' reverseOrder={false} />
         {isSubmitting && <p className='text-red-500'>Submitiing...</p> }
       

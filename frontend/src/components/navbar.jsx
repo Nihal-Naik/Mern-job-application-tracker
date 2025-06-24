@@ -9,7 +9,7 @@ import Login from './login'
 import { LuLogOut } from "react-icons/lu";
 import toast from 'react-hot-toast';
 import { GiHamburgerMenu } from "react-icons/gi";
-import {motion} from 'framer-motion'
+import {AnimatePresence, motion} from 'framer-motion'
 import Sidebar from './Sidebar';
 import { Changesidebar } from '../features/sidebarSlice';
 
@@ -31,11 +31,11 @@ const navbar = () => {
   
 
   const handlesignup=()=>{
-    {changelogin ? dispatch(Changelogin()): dispatch(Changesignup())}
+    {changelogin ? dispatch(Changelogin()) && dispatch(Changesignup()): dispatch(Changesignup())}
   }
 
   const handlelogin=()=>{
-    {changesignup ? dispatch(Changesignup()): dispatch(Changelogin())}
+    {changesignup ? dispatch(Changesignup()) && dispatch(Changelogin()) : dispatch(Changelogin())}
   }
   const handlesidebar=()=>{
     dispatch(Changesidebar())
@@ -61,7 +61,7 @@ const navbar = () => {
   return (
     <div className=''>
       {changesidebar && <Sidebar />}
-      <nav className='mb-5 md:mb-0 flex w-[100vw] justify-between items-center p-3'>
+      <nav className='mb-[5%] m-auto  flex w-[90vw] md:w-[100vw] justify-between items-center p-3'>
         <div className='flex justify-start items-center font-sans font-extrabold text-xl'>
           <SiPivotaltracker className='text-green-600' />
           <NavLink to="/">

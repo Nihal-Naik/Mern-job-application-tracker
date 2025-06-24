@@ -6,6 +6,7 @@ import { Changelogin } from '../features/loginSlice';
 import { useNavigate } from 'react-router-dom';
 import { Changesignup } from '../features/signupSlice';
 import { Changechange } from '../features/changeSlice';
+import { motion } from 'framer-motion';
 
 const login = () => {
     const dispatch=useDispatch()
@@ -46,16 +47,16 @@ const login = () => {
 
     
   return (
-    <div className='absolute w-sm right-100 border-2 border-green-500 h-80 bg-white top-20'>
+    <div className='z-10 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
       
-        <form onSubmit={handleSubmit(onSubmit)} className='grid justify-center mt-15 scale-110'>
+        <motion.form initial={{scale:0,opacity:0}} animate={{scale:1,opacity:1}} onSubmit={handleSubmit(onSubmit)} className='bg-white border-2 border-green-500 p-15 grid justify-center items-center '>
             <input className='placeholder:text-green-500 border-b-2 border-b-green-500 p-2 focus:outline-0 mb-5' type="text" placeholder='Email' defaultValue="" {...register("email",{required:true})} />
             {errors.email && <p className='text-red-500'>Enter your email</p> }
             <input className='placeholder:text-green-500 border-b-2 border-b-green-500 p-2 focus:outline-0 mb-5' type="text" placeholder='Password' defaultValue="" {...register("password",{required:true})} />
             {errors.name && <p className='text-red-500'>Enter your password</p> }
             <input disabled={isSubmitting} className='bg-green-500 p-2 rounded-full mt-5 text-white cursor-pointer hover:bg-green-800' type="submit" value="Login" />
-        </form>
-        <p className='text-gray-600 ml-20 mt-5'>Don't have an account? <span onClick={displaylogin} className='cursor-pointer text-green-500'>Signup</span></p>
+            <p className='text-gray-600 mt-5'>Don't have an account? <span onClick={displaylogin} className='cursor-pointer text-green-500'>Signup</span></p>
+        </motion.form>
         <Toaster position='top-center' reverseOrder={false} />
         {isSubmitting && <p className='text-red-500 ml-20'>Submitiing...</p> }
       
